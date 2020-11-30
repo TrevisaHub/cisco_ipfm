@@ -1,0 +1,15 @@
+
+  nxos_provider:
+    username: "{{ user }}"
+    password: "{{ pwd }}"
+    transport: nxapi
+    host: "{{ inventory_hostname }}"
+
+  flow_policy:
+    - { policy_name: custom1, bandwidth: 10000, dscp: 42, group_range_from: 239.0.0.0, group_range_to: 239.0.0.255 }
+    - { policy_name: Ancillary, bandwidth: 1000, dscp: 18, group_range_from: 239.1.30.0, group_range_to: 239.1.30.255 }
+    - { policy_name: Audio, bandwidth: 2000, dscp: 18, group_range_from: 239.1.40.0, group_range_to: 239.1.40.255 }
+    - { policy_name: Video_1.5, bandwidth: 1600000, dscp: 18, group_range_from: 239.1.20.0, group_range_to: 239.1.20.255 }
+
+## POLICY MUST USE ONE_WORD_OR_UNDERSCORE (no " - ")
+

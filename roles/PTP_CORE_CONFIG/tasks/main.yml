@@ -1,0 +1,22 @@
+---      
+- name: CONFIGURE CLOCK PROTOCOL PTP 
+  nxos_config:
+    lines: 
+      - clock protocol ptp vdc 1
+    provider: "{{ nxos_provider }}"
+
+- name: CONFIGURE PTP SOURCE (Local Loopbak 0 IP)
+  nxos_config:
+    lines: 
+      - ptp source {{ item.addr }}
+    provider: "{{ nxos_provider }}"
+  with_items: 
+  - "{{ loopbacks }}"
+  
+- name: CONFIGURE PTP INTERFACES
+  nxos_config:
+    lines: ptp
+    parents:
+      - 'interface {{ item.interface }}'
+    provider: "{{ nxos_provider  }}"
+  with_items: "{{ l3_interfaces }}"

@@ -1,0 +1,41 @@
+---
+- hosts: fabric
+  connection: local
+  gather_facts: false
+  roles:
+    - TCAM_CARVING_CONFIG
+    - SAVE_CONFIG_REBOOT
+  
+- hosts: spine
+  connection: local
+  gather_facts: false
+  roles:
+    - role: SPINE_CORE_CONFIG
+
+- hosts: leaf
+  connection: local
+  gather_facts: false
+  roles:
+    - role: LEAF_CORE_CONFIG
+
+- hosts: fabric
+  connection: local
+  gather_facts: false
+  roles:
+    - NBM_CORE_CONFIG
+    - PTP_CORE_CONFIG
+
+- hosts: spine
+  connection: local
+  gather_facts: false
+  roles:
+    - NBM_SPINE_CONFIG
+
+
+    
+
+
+  #tasks:
+  #  - name: save config
+  #    nxos_save_config: host={{ inventory_hostname }}
+

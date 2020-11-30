@@ -1,0 +1,69 @@
+    
+
+- name: CONFIGURE NBM 
+  nxos_config:
+    lines: 
+      - route-map spt permit 10 
+      - ip pim prune-on-expiry
+      - ip pim ssm range none
+      - ip pim spt-threshold infinity group-list spt
+      - ip multicast multipath nbm
+      - nbm mode pim-active
+
+    provider: "{{ nxos_provider  }}"
+  
+  nxos_config:
+    lines: 
+      #(conf)#route-map spt permit 10 
+      - match ip multicast group 224.0.0.0/4 
+    parents:
+      - 'route-map spt permit 10'
+    provider: "{{ nxos_provider  }}"
+
+- name: CONFIGURE ASM RANGE 
+  nxos_config:
+    lines:
+      - nbm flow asm range 238.0.0.0/8 239.0.0.0/8
+    provider: "{{ nxos_provider  }}"
+
+- name: CONFIGURE FLOW POLICY (Initial Value 0 Kbps)
+  nxos_config:
+    lines:
+      - nbm flow bandwidth 0 kbps
+    provider: "{{ nxos_provider  }}"
+
+- name: CREATE FLOW POLICIES
+  nxos_config:
+    lines: 
+      - policy Custom1
+      - policy Ancillary
+      - policy Audio
+      - policy Video_1.5
+
+    parents:
+      - 'nbm flow-policy' 
+    provider: "{{ nxos_provider}}"
+  
+
+#- name: CREATE FLOW POLICIES
+#  nxos_config:
+#    lines: 
+#      - bandwidth 1000 kbps
+#      - dscp 18
+#      - ip group-range 239.1.40.0 to 239.1.40.255
+#
+#    parents:
+#      - 'nbm Custom1' 
+#    provider: "{{ nxos_provider}}"
+
+
+#ADD THIS LATER!!    
+
+- name: CONFIGURE TCAM Carving
+  nxos_config:
+    lines:
+      - hardware access-list tcam region ing-racl 256
+      - hardware access-list tcam region ing-l3-vlan-qos 256
+      - hardware access-list tcam region ing-nbm 1536
+    provider: "{{ nxos_provider  }}"
+    when: "{{ inventory_hostname }}"

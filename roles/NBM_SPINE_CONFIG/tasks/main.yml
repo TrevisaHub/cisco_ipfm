@@ -1,0 +1,8 @@
+
+- name: CONFIGURE NBM REQUIREMENTS FOR SPINE (pre-build-spt force)
+  nxos_config:
+    lines: 
+      - ip pim pre-build-spt force 
+      # just on the spines!!!
+    provider: "{{ nxos_provider  }}"
+  

@@ -1,0 +1,27 @@
+---
+
+  nxos_provider:
+    username: "{{ user }}"
+    password: "{{ pwd }}"
+    transport: nxapi
+    host: "{{ inventory_hostname }}"
+
+
+  features:
+  - { feature: ospf }
+  - { feature: pim }
+  #- { feature: netflow }
+  - { feature: ptp }
+  - { feature: telemetry }
+  - { feature: nbm }
+
+
+  ospf_process_id: 100
+
+  ospf_area: 0
+  
+  rp_address: 172.16.1.1
+
+  #ptp INFO
+
+  

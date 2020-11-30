@@ -1,0 +1,9 @@
+---
+- name: CONFIGURE TCAM Carving
+  nxos_config:
+    lines:
+      - hardware access-list tcam region ing-racl 256
+      - hardware access-list tcam region ing-l3-vlan-qos 256
+      - hardware access-list tcam region ing-nbm 1536
+    provider: "{{ nxos_provider  }}"
+    when: "{{ inventory_hostname }}"

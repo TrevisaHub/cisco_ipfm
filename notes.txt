@@ -1,0 +1,41 @@
+Nexus 2K – Management switch – Was already in the rack
+Nexus 93240YC-FX2 – Leaf 1 – Management port to be connected to N2K Port 15
+Nexus 93240YC-FX2 – Leaf 2 – Management port to be connected to N2K Port 16
+Nexus 9336C-FX2 – Spine 1 – Management port to be connected to N2K Port 17
+Nexus 9336C-FX2 – Spine 2 – Management port to be connected to N2K Port 18
+
+ESXi - 
+
+ 
+Connections between switches:
+ 
+L1 Port 49 < > S1 Port 01
+L1 Port 50 < > S1 Port 02
+L1 Port 52 < > S2 Port 01
+L1 Port 53 < > S2 Port 02
+ 
+L2 Port 49 < > S1 Port 03
+L2 Port 50 < > S1 Port 04
+L2 Port 52 < > S2 Port 03
+L2 Port 53 < > S2 Port 04
+ 
+Logic: Ports on Leaf 1 will always connect to ports 01 and 02 on each spine; Ports on Leaf 2 will always connect to ports 03 and 04 on each spine. Ports 49 and 50 on all leaves will always connect to Spine 1. Ports 52 and 53 on all leaves will always connect to Spine 2
+
+
+
+Loopbacks: 
+spine1: 172.16.1.1
+spine2: 172.16.1.2
+leaf1: 172.16.1.11
+leaf2: 172.16.1.12
+
+
+subnets:
+172.16.10.0/31
+172.16.10.2/31
+172.16.10.4/31
+172.16.10.6/31
+172.16.10.8/31
+172.16.10.10/31
+172.16.10.12/31
+172.16.10.14/31

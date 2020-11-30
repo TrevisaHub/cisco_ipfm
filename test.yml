@@ -1,0 +1,25 @@
+---
+- name: IP LOOPBACK
+  hosts: leaf
+  connection: local
+  gather_facts: false
+
+  tasks: 
+    - name: "Create Loopback interface"
+      nxos_interface:
+        host: "{{ ansible_host }}"
+        interface: Loopback2
+        mode: layer3
+        admin_state: up
+
+    - name: "Config IP on Interface"
+      nxos_interface:
+        host: "{{ ansible_host }}"
+        state: present
+        interface: Loopback2
+        version: v4
+        addr: 2.2.2.2
+        mask: 32
+    
+         
+

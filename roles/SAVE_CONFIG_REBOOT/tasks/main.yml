@@ -1,0 +1,7 @@
+---
+tasks:
+  - name: SAVE CONFIG
+    nxos_save_config: host={{ inventory_hostname }}
+    
+- nxos_reboot:
+    confirm: true

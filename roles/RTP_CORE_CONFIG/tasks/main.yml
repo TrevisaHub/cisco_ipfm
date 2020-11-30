@@ -1,0 +1,34 @@
+    
+
+- name: CONFIGURE RTP UDF 
+  nxos_config:
+    lines: 
+      - udf netflow_rtp netflow-rtp
+    provider: "{{ nxos_provider  }}"
+  
+
+# reload
+
+- name: ENABLE FLOW RTP 
+  nxos_config:
+    lines: 
+      - ip flow rtp
+    provider: "{{ nxos_provider  }}"
+  
+
+- name: CREATE RTP ACCESS-LIST TO CAPTURE TRAFFIC 
+  nxos_config:
+    lines: 
+      - ip access-list nfm-rtp-ipv4-acl
+    provider: "{{ nxos_provider  }}"
+
+
+- name: CONFIGURE ACCESS-LIST TO CAPTURE TRAFFIC
+  nxos_config:
+    lines: 
+      - ignore routable
+      - 10 permit udp any any range 16384 32767
+
+    parents: ip access-list nfm-rtp-ipv4-acl
+    provider: "{{ nxos_provider  }}"
+

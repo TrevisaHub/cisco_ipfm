@@ -1,0 +1,7 @@
+
+  nxos_provider:
+    username: "{{ user }}"
+    password: "{{ pwd }}"
+    transport: nxapi
+    host: "{{ inventory_hostname }}"
+

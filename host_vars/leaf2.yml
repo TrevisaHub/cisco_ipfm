@@ -1,0 +1,20 @@
+---
+
+router_id: 172.16.1.12
+
+loopbacks:
+  - { interface: loopback0, addr: 172.16.1.12, mask: 32 }
+
+
+########################### LAB ESPN ##############################
+
+l3_interfaces:
+  - { interface: Ethernet1/49, addr: 172.16.10.5 , mask: 31 , description: description "Connection to Spine 1 eth1/3" }
+  - { interface: Ethernet1/50, addr: 172.16.10.7 , mask: 31 , description: description "Connection to Spine 1 eth1/4" }
+  - { interface: Ethernet1/51, addr: 172.16.10.13 , mask: 31 , description: description "Connection to Spine 2 eth1/3" }
+  - { interface: Ethernet1/52, addr: 172.16.10.15 , mask: 31 , description: description "Connection to Spine 2 eth1/4" }
+
+
+### LAB NYC
+#l3_interfaces:
+#  - { interface: Ethernet1/49, addr: 172.16.10.5 , mask: 31 , description: "Connection to Spine 1 eth1/2" }
